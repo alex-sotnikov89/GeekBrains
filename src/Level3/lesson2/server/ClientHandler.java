@@ -32,7 +32,7 @@ public class ClientHandler {
                         }
                     }
                 }
-            }, 12000);
+            }, 1200000);
             doListen();
         } catch (IOException e) {
             throw new RuntimeException("SWW", e);
