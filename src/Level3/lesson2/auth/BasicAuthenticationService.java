@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BasicAuthenticationService implements AuthenticationService {
+
     /**
      * Fake database with stubbed entities
      */
