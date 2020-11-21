@@ -1,6 +1,6 @@
-package Lesson7.chat.auth;
+package Level3.lesson2.auth;
 
-import Lesson7.chat.entity.User;
+import Level3.lesson2.entity.User;
 
 import java.util.Optional;
 

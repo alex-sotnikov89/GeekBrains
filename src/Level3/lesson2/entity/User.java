@@ -1,4 +1,4 @@
-package Lesson7.chat.entity;
+package Level3.lesson2.entity;
 
 public class User {
     private String nickname;

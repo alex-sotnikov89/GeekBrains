@@ -1,4 +1,4 @@
-package Lesson7.chat;
+package Level3.lesson2;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

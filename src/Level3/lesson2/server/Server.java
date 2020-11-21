@@ -1,6 +1,6 @@
-package Lesson7.chat.server;
+package Level3.lesson2.server;
 
-import Lesson7.chat.auth.AuthenticationService;
+import Level3.lesson2.auth.AuthenticationService;
 
 public interface Server {
     void broadcastMessage(String message);

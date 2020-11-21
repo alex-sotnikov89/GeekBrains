@@ -1,6 +1,6 @@
-package Lesson7.chat;
+package Level3.lesson2;
 
-import Lesson7.chat.server.ChatServer;
+import Level3.lesson2.server.ChatServer;
 
 public class ServerApp {
     public static void main(String[] args) {

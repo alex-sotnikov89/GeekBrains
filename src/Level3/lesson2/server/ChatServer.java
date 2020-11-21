@@ -1,8 +1,7 @@
-package Lesson7.chat.server;
+package Level3.lesson2.server;
 
-import Lesson6.Client.Client;
-import Lesson7.chat.auth.AuthenticationService;
-import Lesson7.chat.auth.BasicAuthenticationService;
+import Level3.lesson2.auth.AuthenticationService;
+import Level3.lesson2.auth.BasicAuthenticationService;
 
 import java.io.IOException;
 import java.net.ServerSocket;
