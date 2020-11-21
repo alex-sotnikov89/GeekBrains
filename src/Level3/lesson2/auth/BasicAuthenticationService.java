@@ -43,11 +43,10 @@ public class BasicAuthenticationService implements AuthenticationService {
                     return Optional.of(user1);
                 }
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return Optional.empty();
-
     }
 }

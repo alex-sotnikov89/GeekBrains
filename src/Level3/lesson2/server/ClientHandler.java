@@ -1,9 +1,15 @@
 package Level3.lesson2.server;
 
+import Level3.lesson2.auth.DBService;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,6 +118,9 @@ public class ClientHandler {
                     server.sendPrivateMessage(messageValues[1], messageValues[2]);
                 } else if (message.equals("-exit")) {
                     return;
+                } else if (message.startsWith("/nick")) {
+                    String[] messageValues = message.split("\\s");
+                    System.out.println("Change nickname: " + changeNickname(messageValues[1]));
                 } else {
                     server.broadcastMessage(message);
                 }
@@ -127,6 +136,47 @@ public class ClientHandler {
         } catch (IOException e) {
             throw new RuntimeException("SWW", e);
         }
+    }
+
+    public boolean changeNickname(String newNickname) {
+        int id;
+        Connection connection = DBService.getConnection();
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(
+                    "SELECT * FROM users WHERE nickname = ?"
+            );
+            statement.setNString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("id");
+
+            statement = connection.prepareStatement(
+                    "UPDATE users SET nickname = ? WHERE id = ?"
+            );
+            statement.setNString(1, newNickname);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+
+            statement = connection.prepareStatement(
+                    "SELECT * FROM users WHERE nickname = ?"
+            );
+            statement.setNString(1, newNickname);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+
+            if (resultSet.getString("nickname").equals(newNickname)) {
+                name = newNickname;
+                connection.close();
+                return true;
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override
