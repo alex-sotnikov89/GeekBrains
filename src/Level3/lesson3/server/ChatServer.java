@@ -1,5 +1,6 @@
 package Level3.lesson3.server;
 
+import Level3.lesson3.Log.LogService;
 import Level3.lesson3.auth.AuthenticationService;
 import Level3.lesson3.auth.BasicAuthenticationService;
 
@@ -11,10 +12,12 @@ import java.util.*;
 public class ChatServer implements Server {
     private Set<ClientHandler> clients;
     private AuthenticationService authenticationService;
+    private LogService logService;
 
 
     public ChatServer() {
         try {
+            logService = new LogService(new File("./src/Level3/lesson3/Log/Log.txt"));
             System.out.println("Server is starting up...");
             ServerSocket serverSocket = new ServerSocket(8888);
             clients = new HashSet<>();
@@ -35,7 +38,7 @@ public class ChatServer implements Server {
     @Override
     public synchronized void broadcastMessage(String message) {
         clients.forEach(client -> client.sendMessage(message));
-        saveHistoryMassage(message);
+        logService.saveHistoryMassage(message);
     }
 
     @Override
@@ -44,9 +47,7 @@ public class ChatServer implements Server {
             if (c.getName().equals(nickname)) {
                 c.sendMessage(message);
             }
-
         }
-
     }
 
     @Override
@@ -60,6 +61,7 @@ public class ChatServer implements Server {
     @Override
     public synchronized void subscribe(ClientHandler client) {
         clients.add(client);
+        sendPrivateMessage(client.getName(),logService.showHistory(100));
     }
 
     @Override
@@ -72,51 +74,5 @@ public class ChatServer implements Server {
         return authenticationService;
     }
 
-    @Override
-    public void saveHistoryMassage(String message) {
-        try {
-            BufferedWriter bw = new BufferedWriter(
-                    new FileWriter(
-                            new File("./src/Level3/lesson3/Log/Log.txt"),
-                            true
-                    )
-            );
 
-            bw.newLine();
-            bw.write(String.format(
-                    "%s ",
-                    new Date()
-            )+" : "+message);
-            bw.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void showHistory(ClientHandler clientHandler) {
-        try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(
-                            new File("./src/Level3/lesson3/Log/Log.txt")
-                    )
-            );
-            int startPosition;
-            String line;
-            List<String> tmp = new ArrayList<String>();
-            while ((line = br.readLine()) != null) {
-                tmp.add(line);
-            }
-            if (tmp.size() > 100) {
-                startPosition = tmp.size() - 101;
-            } else {
-                startPosition = 0;
-            }
-            for (int i = startPosition; i < tmp.size(); i++) {
-                clientHandler.sendHistory(tmp.get(i));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

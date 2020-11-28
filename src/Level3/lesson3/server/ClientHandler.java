@@ -53,7 +53,6 @@ public class ClientHandler {
         new Thread(() -> {
             try {
                 doAuth();
-                server.showHistory(this);
                 receiveMessage();
             } catch (Exception e) {
                 throw new RuntimeException("SWW", e);
@@ -132,13 +131,6 @@ public class ClientHandler {
     }
 
     public void sendMessage(String message) {
-        try {
-            out.writeUTF(message);
-        } catch (IOException e) {
-            throw new RuntimeException("SWW", e);
-        }
-    }
-    public void sendHistory(String message) {
         try {
             out.writeUTF(message);
         } catch (IOException e) {

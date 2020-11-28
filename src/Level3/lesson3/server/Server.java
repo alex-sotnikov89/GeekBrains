@@ -9,6 +9,6 @@ public interface Server {
     void subscribe(ClientHandler client);
     void unsubscribe(ClientHandler client);
     AuthenticationService getAuthenticationService();
-    void saveHistoryMassage(String message);
-    void showHistory(ClientHandler clientHandler);
+//    void saveHistoryMassage(String message);
+//    void showHistory(ClientHandler clientHandler);
 }

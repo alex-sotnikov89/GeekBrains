@@ -114,3 +114,13 @@ Fri Nov 27 21:44:01 MSK 2020  : n1 is logged in.
 Fri Nov 27 21:44:43 MSK 2020  : From n1: dsfsdff
 Fri Nov 27 21:44:45 MSK 2020  : From n1: fffff
 Fri Nov 27 21:44:47 MSK 2020  : From n1: fffdsfsd
+Sat Nov 28 19:09:12 MSK 2020  : n1 is logged in.
+Sat Nov 28 19:09:33 MSK 2020  : From n1: dsfhgjdshf
+Sat Nov 28 19:09:36 MSK 2020  : From n1: hfhhfhfhf
+Sat Nov 28 19:09:42 MSK 2020  : From n1: ,xcdvm.,dfg
+Sat Nov 28 19:09:58 MSK 2020  : n1 is logged in.
+Sat Nov 28 19:15:33 MSK 2020  : n1 is logged in.
+Sat Nov 28 19:15:36 MSK 2020  : From n1: dsfsdf
+Sat Nov 28 19:15:37 MSK 2020  : From n1: fdsfsdf
+Sat Nov 28 19:15:56 MSK 2020  : n2 is logged in.
+Sat Nov 28 19:16:05 MSK 2020  : From n1: dsfgdf
