@@ -124,3 +124,7 @@ Sat Nov 28 19:15:36 MSK 2020  : From n1: dsfsdf
 Sat Nov 28 19:15:37 MSK 2020  : From n1: fdsfsdf
 Sat Nov 28 19:15:56 MSK 2020  : n2 is logged in.
 Sat Nov 28 19:16:05 MSK 2020  : From n1: dsfgdf
+Sat Nov 28 19:50:38 MSK 2020  : n1 is logged in.
+Sat Nov 28 19:51:16 MSK 2020  : n2 is logged in.
+Sat Nov 28 19:51:30 MSK 2020  : From n1: 
+Sat Nov 28 19:51:30 MSK 2020  : From n1: dsf

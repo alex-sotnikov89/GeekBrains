@@ -61,7 +61,7 @@ public class ChatServer implements Server {
     @Override
     public synchronized void subscribe(ClientHandler client) {
         clients.add(client);
-        sendPrivateMessage(client.getName(),logService.showHistory(100));
+        client.sendMessage(logService.showHistory(100));
     }
 
     @Override
