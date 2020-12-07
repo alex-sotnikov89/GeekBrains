@@ -1,23 +1,40 @@
 package Level3.Lesson5;
 
+
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class GasPool {
-    private static float fuelReserve = 200f;
+    private final ReentrantReadWriteLock lock=new ReentrantReadWriteLock();
+    private float fuelReserve = 200f;
 
     public float request(float amount){
-        if ((fuelReserve-amount)<0){
-            float result = fuelReserve;
-            fuelReserve=0;
-            return result;
+        lock.writeLock().lock();
+        try {
+            if ((fuelReserve-amount)<0){
+                float result = fuelReserve;
+                fuelReserve=0;
+                return result;
+            }
+            fuelReserve -=amount;
+            System.out.println("Fuel left: "+fuelReserve);
+            return  amount;
+        }finally {
+            lock.writeLock().unlock();
         }
-        fuelReserve -=amount;
-        return  amount;
+
     }
 
     public boolean getInfo() {
-        if (fuelReserve<=0){
-            System.out.println("Fuelstation is empty!");
-            return false;
+        lock.readLock().lock();
+        try {
+            if (fuelReserve<=0){
+                System.out.println("Fuelstation is empty!");
+                return false;
+            }
+            return true;
+        }finally {
+            lock.readLock().unlock();
         }
-        return true;
+
     }
 }

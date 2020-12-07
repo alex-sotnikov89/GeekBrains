@@ -30,7 +30,7 @@ public abstract class Transport implements Runnable {
                     System.out.println(String.format(
                             "[%s] is going to the road.", this.getModel())
                     );
-                    Thread.sleep(3000);
+                    Thread.sleep(300);
                     fuelVolume -= fuelExpenses;
                 }
                 fuelStation.refuel(this);

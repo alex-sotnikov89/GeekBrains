@@ -1,8 +1,5 @@
 package Level3.Lesson5;
 
-import Level3.Lesson5.GasPool;
-import Level3.Lesson5.Transport;
-
 import java.util.concurrent.Semaphore;
 
 public class FuelStation {
@@ -18,18 +15,23 @@ public class FuelStation {
         return gasPool.getInfo();
     }
 
-    public void refuel(Transport transport) throws InterruptedException {
+    public void refuel(Transport transport) {
         System.out.println(String.format(
                 "[%s] is going to fuelstation", transport.getModel())
         );
-        if (gasPool.getInfo()) {
+        try {
             semaphore.acquire();
-            float fuel;
-            fuel = gasPool.request(transport.getTankVolume() - transport.getFuelVolume());
-            System.out.println(String.format("[%s] is refueling.", transport.getModel()));
-            Thread.sleep(5000);
-            System.out.println(String.format("[%s] filled to %s.", transport.getModel(), fuel));
-            transport.setFuelVolume(fuel);
+            if (gasPool.getInfo()) {
+                float fuel;
+                fuel = gasPool.request(transport.getTankVolume() - transport.getFuelVolume());
+                System.out.println(String.format("[%s] is refueling.", transport.getModel()));
+                Thread.sleep(5000);
+                System.out.println(String.format("[%s] filled to %s.", transport.getModel(), fuel));
+                transport.setFuelVolume(fuel);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
             semaphore.release();
         }
     }
